@@ -1,0 +1,9 @@
+node_modules
+dev/
+.idea/
+public/javascripts/
+public/stylesheets/
+public/fonts/
+.env
+mix-manifest.json
+package-lock.json
