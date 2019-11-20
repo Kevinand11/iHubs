@@ -1,11 +1,5 @@
 .idea/
 dev/
 node_modules
-public/javascripts/
-public/stylesheets/
-public/images/
-public/fonts/
-storage/
-.env
 mix-manifest.json
 package-lock.json
