@@ -12,7 +12,7 @@ module.exports = (DataTypes) => {
 		},
 		read: {
 			allowNull: false,
-			type: DataTypes.BOOLEAN,
+			type: DataTypes.INTEGER,
 			defaultValue: 0
 		},
 		read_at: {
