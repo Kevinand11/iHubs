@@ -10,7 +10,7 @@ module.exports = {
 				file.indexOf(".") !== 0 && file.slice(-3) === ".js"
 			).forEach((file) => {
 				router.use(
-					file.slice(0, -3),
+					`/${file.slice(0, -3)}`,
 					require(path.join(__dirname, "api", file))
 				);
 			});
