@@ -40,9 +40,7 @@ module.exports = {
 	},
 	profile: (req, res) => {
 		models.user.findByPk(req.user.id, {
-			include: [ "posts", "followers", "following",
-				"token", "sentMessage", "receivedMessage"
-			]
+			include: [ "posts", "following", "followers" ]
 		}).then((user) => res.json(user).end())
 			.catch((error) => res.status(400).json({ error }).end());
 	}

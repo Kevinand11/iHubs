@@ -7,13 +7,13 @@ module.exports = (req, res, next) => {
 		let token = bearer.split(" ")[1];
 		jwt.verify(token, env["SESSION_KEY"], (err, authData) => {
 			if (err) {
-				res.status(400).json({ error: "Invalid access token." });
+				res.status(401).json({ error: "Invalid access token." });
 			} else {
 				req.user = authData.user;
 				next();
 			}
 		});
 	} else {
-		res.sendStatus(403);
+		res.status(401).json("Token not found").end();
 	}
 };

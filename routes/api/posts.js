@@ -5,6 +5,7 @@ let postsController = require("../../app/controllers/api/posts");
 
 router.get("/", postsController.index);
 router.post("/", isLoggedIn, postsController.store);
+router.get("/following", isLoggedIn, postsController.following);
 router.get("/:id", postsController.show);
 router.put("/:id", isLoggedIn, isMyPostOrAdmin, postsController.update);
 router.delete("/:id", isLoggedIn, isMyPostOrAdmin, postsController.delete);

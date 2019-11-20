@@ -31,11 +31,12 @@ module.exports = {
             }).catch((error) => res.status(400).json({ error }).end());
     },
     read: (req, res) => {
-        models.message.findByPk(req.params.id).then((message) => {
-            message.updateReadAt()
-                .then((message) => res.json(message).end())
-                .catch((error) => res.status(400).json({ error }).end());
-        })
+        models.message.findByPk(req.params.id)
+            .then((message) => {
+                message.updateReadAt()
+                    .then((message) => res.json(message).end())
+                    .catch((error) => res.status(400).json({ error }).end());
+            }).catch((error) => res.status(400).json({ error }).end());
     },
     delete: (req, res) => {
         models.message.destroy({ where: { id: req.params.id } })

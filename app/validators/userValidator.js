@@ -15,5 +15,12 @@ module.exports = {
 			email: "required|email"
 		};
 		return indicative.validator.validateAll(body, rules);
+	},
+	updatePassword: (body) => {
+		let rules = {
+			password: "required|min:8",
+			newPassword: "required|min:8|confirmed"
+		};
+		return indicative.validator.validateAll(body, rules);
 	}
 };

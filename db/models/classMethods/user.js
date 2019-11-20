@@ -1,7 +1,3 @@
-const jwt = require("jsonwebtoken");
-const env = require("dotenv").config().parsed;
-let models = require("../");
-
 module.exports = {
 	associate: function(models) {
 		this.hasOne(models.token);

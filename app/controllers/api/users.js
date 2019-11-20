@@ -31,6 +31,21 @@ module.exports = {
 					}).catch((error) => res.status(400).json({ error }).end());
 			}).catch((error) => res.status(400).json({ error }).end());
 	},
+	updatePassword: (req, res) => {
+		userValidator.updatePassword(req.body)
+			.then((result) => {
+				models.user.findByPk(req.params.id)
+					.then((user) => {
+						if(user.comparePassword(result.password)){
+							user.update({ password: newPassword })
+								.then((user) => res.json(user).end())
+								.catch((error) => res.status(400).json({ error }).end());
+						}else{
+							res.status(401).then("Invalid password").end();
+						}
+					}).catch((error) => res.status(400).json({ error }).end());
+			}).catch((error) => res.status(400).json({ error }).end());
+	},
 	delete: (req, res) => {
 		models.user.destroy({ where: { id: req.params.id } })
 			.then((result) => res.json(result).end())
