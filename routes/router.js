@@ -1,5 +1,7 @@
 const fs = require("fs");
 const path = require("path");
+const router = require("express").Router();
+const subdomain = require("express-subdomain");
 
 module.exports = {
 	registerAPIRoutes: (app) => {
@@ -7,12 +9,12 @@ module.exports = {
 			.filter((file) =>
 				file.indexOf(".") !== 0 && file.slice(-3) === ".js"
 			).forEach((file) => {
-				app.use(
-					"/api/" + file.slice(0, -3),
+				router.use(
+					file.slice(0, -3),
 					require(path.join(__dirname, "api", file))
 				);
 			});
-		app.use("/api", require(path.join(__dirname, "api", ".js")));
+		app.use(subdomain("api", router));
 	},
 	registerWebRoutes: (app) => {
 		fs.readdirSync(path.join(__dirname , "web"))
