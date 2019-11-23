@@ -5,7 +5,7 @@ const router = require("express").Router();
 
 module.exports = {
 	registerAPIRoutes: (app) => {
-		fs.readdirSync(path.join(__dirname , "api"))
+		fs.readdirSync(path.join(__dirname, "api"))
 			.filter((file) =>
 				file.indexOf(".") !== 0 && file.slice(-3) === ".js"
 			).forEach((file) => {
@@ -15,10 +15,10 @@ module.exports = {
 				);
 			});
 		router.use("/", require(path.join(__dirname, "api", ".js")));
-		app.use("api", router);
+		app.use("/api", router);
 	},
 	registerWebRoutes: (app) => {
-		fs.readdirSync(path.join(__dirname , "web"))
+		fs.readdirSync(path.join(__dirname, "web"))
 			.filter((file) =>
 				file.indexOf(".") !== 0 && file.slice(-3) === ".js"
 			).forEach((file) => {
