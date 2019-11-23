@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const router = require("express").Router();
-const subdomain = require("express-subdomain");
+//const subdomain = require("express-subdomain");
 
 module.exports = {
 	registerAPIRoutes: (app) => {
@@ -15,7 +15,7 @@ module.exports = {
 				);
 			});
 		router.use("/", require(path.join(__dirname, "api", ".js")));
-		app.use(subdomain("api", router));
+		app.use("api", router);
 	},
 	registerWebRoutes: (app) => {
 		fs.readdirSync(path.join(__dirname , "web"))

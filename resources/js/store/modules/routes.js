@@ -1,4 +1,4 @@
-const apiBase = "http://api.ihubs.herokuapp.com/";
+const apiBase = `${window.location.origin}/api/`;
 
 let state = {
 	users: {
