@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-let env = require("dotenv").config().parsed;
+let env = process.env.NODE_ENV === "production" ? process.env : require("dotenv").config().parsed;
 
 module.exports = (req, res, next) => {
 	let bearer = req.headers["authorization"];

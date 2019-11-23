@@ -1,18 +1,15 @@
 const mix = require("laravel-mix");
+require("laravel-mix-bundle-analyzer");
+const path = require("path");
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
-
-mix.config.fileLoaderDirs.fonts = "public/fonts";
+mix.bundleAnalyzer();
 
 mix
-	.js("resources/js/app.js", "public/javascripts/app.js")
-	.sass("resources/sass/app.scss", "public/stylesheets/app.css");
+	.js("resources/js/app.js", "javascripts/app.js")
+	.sass("resources/sass/app.scss", "stylesheets/app.css")
+	.webpackConfig({
+		output: {
+			path: path.join(__dirname, "public"),
+			chunkFilename: "javascripts/[name].bundle.js"
+		}
+	});

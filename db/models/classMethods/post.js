@@ -8,7 +8,8 @@ module.exports = {
 		return this.paginate({
 			order: [["created_at", "DESC"]],
 			page,
-			paginate: 25,
+			paginate: 50,
+			include: ["user"]
 		}).then((res) => res)
 			.catch((err) => err);
 	},
@@ -16,8 +17,19 @@ module.exports = {
 		return this.paginate({
 			order: [["created_at", "DESC"]],
 			page,
-			paginate: 25,
-			where: Sequelize.literal(`(post.user_id IN (SELECT user_id FROM friends WHERE follower_id = ${id}))`)
+			paginate: 50,
+			where: Sequelize.literal(`(post.user_id IN (SELECT user_id FROM friends WHERE follower_id = ${id}))`),
+			include: ["user"]
+		}).then((res) => res)
+			.catch((err) => err);
+	},
+	latestOf: function(id, page){
+		return this.paginate({
+			order: [["created_at", "DESC"]],
+			page,
+			paginate: 50,
+			where: { user_id: id },
+			include: ["user"]
 		}).then((res) => res)
 			.catch((err) => err);
 	}

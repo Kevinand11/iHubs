@@ -7,6 +7,11 @@ module.exports = {
             .then((messages) => res.json(messages).end())
             .catch((error) => res.status(400).json({ error }).end())
     },
+    between: (req, res) => {
+        models.message.between(req.user.id, req.params.id, req.query.page || 1)
+            .then((messages) => res.json(messages).end())
+            .catch((error) => res.status(400).json({ error }).end())
+    },
     store: (req, res) => {
         messageValidator.create(req.body).then((result) => {
             models.user.findByPk(req.user.id).then((user) => {

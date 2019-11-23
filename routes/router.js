@@ -14,6 +14,7 @@ module.exports = {
 					require(path.join(__dirname, "api", file))
 				);
 			});
+		router.use("/", require(path.join(__dirname, "api", ".js")));
 		app.use(subdomain("api", router));
 	},
 	registerWebRoutes: (app) => {

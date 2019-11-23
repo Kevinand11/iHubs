@@ -1,5 +1,8 @@
 .idea/
 dev/
 node_modules
+storage/
+db/db.sqlite
+.env
 mix-manifest.json
 package-lock.json

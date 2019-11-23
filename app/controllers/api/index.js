@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const env = require("dotenv").config().parsed;
+const env = process.env.NODE_ENV === "production" ? process.env : require("dotenv").config().parsed;
 let models = require("../../../db/models");
 let { authValidator } = require("../../validators");
 
@@ -43,5 +43,6 @@ module.exports = {
 			include: [ "posts", "following", "followers" ]
 		}).then((user) => res.json(user).end())
 			.catch((error) => res.status(400).json({ error }).end());
-	}
+	},
+	error: (req, res) => res.status(400).json("Error").end()
 };

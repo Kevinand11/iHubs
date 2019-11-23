@@ -1,19 +1,21 @@
 import Vue from "vue";
+import VueCookies from "vue-cookies";
 
 import router from "./router/";
 import store from "./store/";
-import lang from './lang/';
+import vuetify from "./vuetify/";
 import "./filters/";
 
 import "./dependencies";
 
 import App from "./App.vue";
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
+Vue.use(VueCookies);
 
 new Vue({
     router,
     store,
-    lang,
+    vuetify,
     render: h => h(App)
 }).$mount("#app");

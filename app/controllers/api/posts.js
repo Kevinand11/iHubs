@@ -12,6 +12,11 @@ module.exports = {
 			.then((results) => res.json(results).end())
 			.catch((error) => res.status(500).json({ error }).end());
 	},
+	of: (req, res) => {
+		models.post.latestOf(req.params.id, req.query.page || 1)
+			.then((results) => res.json(results).end())
+			.catch((error) => res.status(500).json({ error }).end());
+	},
 	store: (req, res) => {
 		postValidator.create(req.body).then((result) => {
 			models.user.findByPk(req.user.id).then((user) => {

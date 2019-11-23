@@ -6,17 +6,19 @@ module.exports = (DataTypes) => {
 			type: DataTypes.INTEGER,
 			autoIncrement: true
 		},
-		name: {
+		message: {
 			allowNull: false,
-			type: DataTypes.STRING
-		},
-		price: {
-			allowNull: false,
-			type: DataTypes.INTEGER
-		},
-		description: {
-			allowNull: true,
 			type: DataTypes.TEXT
+		},
+		tags: {
+			allowNull: true,
+			type: DataTypes.TEXT,
+			set: function (tags) {
+				this.setDataValue("tags", tags.join());
+			},
+			get: function () {
+				return this.getDataValue("tags").split(",");
+			}
 		}
 	};
 };

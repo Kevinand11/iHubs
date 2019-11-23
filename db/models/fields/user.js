@@ -28,6 +28,10 @@ module.exports = (DataTypes) => {
 			allowNull: false,
 			type: DataTypes.INTEGER,
 			defaultValue: 0
+		},
+		image: {
+			allowNull: true,
+			type: DataTypes.STRING
 		}
 	};
 };

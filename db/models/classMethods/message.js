@@ -11,8 +11,15 @@ module.exports = {
 	},
 	latest: function(id, page){
 		return this.paginate({ order: [["created_at", "DESC"]],
-			page, paginate: 25,
+			page, paginate: 100,
 			where: { [Op.or]: { to: id, from: id } }
+		}).then((res) => res)
+			.catch((err) => err);
+	},
+	between: function(id1, id2, page){
+		return this.paginate({ order: [["created_at", "DESC"]],
+			page, paginate: 100,
+			where: { [Op.and]: { to: [id1, id2], from: [ id1, id2 ] } }
 		}).then((res) => res)
 			.catch((err) => err);
 	}

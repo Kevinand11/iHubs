@@ -1,47 +1,57 @@
 <template>
-    <div class="container row my-3">
-        <table class="table table-striped table-condensed">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Password</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="user in allUsers" :key="user.id">
-                    <td>{{user.id}}</td>
-                    <td>{{user.name}}</td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.password}}</td>
-                    <td>
-                        <a><i class="fas fa-pen text-warning"></i></a>
-                        &nbsp;|&nbsp;
-                        <a><i class="fas fa-trash text-danger"></i></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div>
+        <post v-for="post in posts" :key="post.id" :post="post"/>
+        <v-btn color="info" block v-if="more" @click="fetchPosts" :loading="busy">Load More</v-btn>
     </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+    import { mapGetters } from "vuex";
+    import Post from "../components/Post";
 
-export default {
-    name: "home",
-    data(){
-        return {};
-    },
-    methods: {
-        ...mapActions([]),
-    }, 
-    computed: {
-        ...mapGetters(["allUsers"]),
+    export default {
+        name: "Home",
+        data(){
+            return {
+                posts: [],
+                page: 1,
+                more: true,
+                busy: false
+            };
+        },
+        methods: {
+            fetchPosts(){
+                this.busy = true;
+                this.$Progress.start();
+                axios.get(this.postsRoutes.index + this.page).then((res) => {
+                    if(res.status == 200){
+                        this.posts.push(...res.data.docs);
+                        if(!res.data.pages || this.page == res.data.pages){
+                            this.more = false;
+                        }
+                        this.page++;
+                        this.busy = false;
+                        this.$Progress.finish();
+                    }else{
+                        this.busy = false;
+                        this.$Progress.fail();
+                        new toast({ type: "error", title: "Error fetching posts" });
+                    }
+                }).catch((err) => {
+                    this.busy = false;
+                    this.$Progress.fail();
+                    new toast({ type: "error", title: "Error fetching posts" });
+                });
+            }
+        },
+        computed: {
+            ...mapGetters(["postsRoutes"]),
+        },
+        mounted(){
+            this.fetchPosts();
+        },
+        components: {
+            "post": Post
+        }
     }
-}
 </script>
-
-

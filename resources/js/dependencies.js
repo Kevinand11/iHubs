@@ -1,18 +1,14 @@
-window.$ = window.jQuery = require("jquery");
-window._ = window.lodash = require("lodash");
-
-require("bootstrap");
-require("@fortawesome/fontawesome-free");
+window._ = window.lodash = {};
 
 import Vue from "vue";
 import { Form, HasError } from "vform";
 import VueProgressBar from "vue-progressbar";
 import swal from "sweetalert2";
 
-Vue.use(VueProgressBar,{
+Vue.use(VueProgressBar, {
     color: "rgb(150,255,200)",
     failedColor: "rgb(255,0,0)",
-    height: "5px",
+    height: "5px"
 });
 
 Vue.component(HasError.name, HasError);

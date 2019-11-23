@@ -35,7 +35,7 @@ module.exports = {
 		return this.paginate({
 			order: [["created_at", "DESC"]],
 			page,
-			paginate: 25
+			paginate: 30
 		}).then((res) => res)
 			.catch((err) => err);
 	}

@@ -1,5 +1,5 @@
 const nodeMailer = require("nodemailer");
-const env = require("dotenv").config().parsed;
+const env = process.env.NODE_ENV === "production" ? process.env : require("dotenv").config().parsed;
 
 let transport = nodeMailer.createTransport({
 	host: env["MAIL_HOST"],

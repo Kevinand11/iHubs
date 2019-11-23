@@ -5,6 +5,7 @@ let { isLoggedIn, isMyMessageOrAdmin,
     isMessageAssociatedWith, canReadMessage } = require("../../app/middlewares");
 
 router.get("/", isLoggedIn, messageController.index);
+router.get("/between/:id", isLoggedIn, messageController.between);
 router.post("/", isLoggedIn, messageController.store);
 router.get("/:id", isLoggedIn, isMessageAssociatedWith, messageController.show);
 router.put("/:id", isLoggedIn, isMyMessageOrAdmin, messageController.update);
