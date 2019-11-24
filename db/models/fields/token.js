@@ -8,7 +8,7 @@ module.exports = (DataTypes) => {
 		},
 		token: {
 			allowNull: false,
-			type: DataTypes.STRING
+			type: DataTypes.TEXT
 		}
 	};
 };
