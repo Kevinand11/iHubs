@@ -8,7 +8,7 @@ const state = {
 const getters = {
     getAuth: state => state.auth,
     getToken: state => state.token,
-    isLoggedIn: state => state.auth.name !== undefined,
+    isLoggedIn: state => state.loggedIn,
     isAdmin: state => state.auth.role === 1,
     getRoles: state => state.roles,
 };
@@ -38,6 +38,7 @@ const actions = {
 const mutations = {
     authorized: (state, user) => {
         state.auth = user;
+        state.loggedIn = true;
     },
     oauth: (state, token) => {
         state.token = token;
@@ -45,6 +46,7 @@ const mutations = {
     clearAuth: (state) => {
         state.auth = {};
         state.token = '';
+        state.loggedIn = false;
     }
 };
 

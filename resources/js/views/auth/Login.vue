@@ -21,6 +21,7 @@
                     :type="visible ? 'text' : 'password'"
                     autocomplete="password"
                 ></v-text-field>
+                <v-switch label="Remember Me?" v-model="rememberMe"></v-switch>
             </v-form>
         </v-card-text>
         <v-card-actions>

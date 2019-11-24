@@ -1,8 +1,8 @@
 <template>
-	<v-dialog v-model="dialog" persistent max-width="600px">
+	<v-dialog v-model="dialog" persistent v-if="isLoggedIn">
 		<template v-slot:activator="{ on }">
-			<v-btn fab :color="appInfo.primary" bottom right class="mr-12 mb-12"
-				fixed x-large v-if="isLoggedIn" v-on="on">
+			<v-btn fab :color="appInfo.primary" bottom right
+				class="mr-12 mb-12" fixed x-large v-on="on">
 				<v-icon color="white">fas fa-plus</v-icon>
 			</v-btn>
 		</template>
