@@ -1,6 +1,6 @@
 <template>
     <v-card>
-        <v-card-title>Login</v-card-title>
+        <v-card-title>Register</v-card-title>
         <v-card-text>
             <v-form>
                 <v-text-field

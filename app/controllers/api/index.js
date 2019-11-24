@@ -39,6 +39,10 @@ module.exports = {
 			}).catch((error) => res.status(400).json({ error }).end());
 		}).catch((error) => res.status(400).json({ error }).end());
 	},
-	profile: (req, res) => req.user,
+	profile: (req, res) => {
+		models.user.findByPk(req.user.id)
+			.then((user) => res.json(user).end())
+			.catch((error) => res.status(400).json({ error }).end());
+	},
 	error: (req, res) => res.status(400).json("Error").end()
 };
