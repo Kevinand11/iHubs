@@ -25,9 +25,10 @@ module.exports = {
 		authValidator.login(req.body).then((result) => {
 			models.user.attemptAuth(result).then((user) => {
 				if (user) {
-					user.getToken().then(({ token }) => {
+					user.getToken().then((token) => {
+						console.log(token);
 						if (token) {
-							res.json({ token }).end();
+							res.json({ token: token.token }).end();
 						} else {
 							jwtSignIn(res, user);
 						}
