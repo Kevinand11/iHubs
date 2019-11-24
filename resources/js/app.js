@@ -10,7 +10,7 @@ import "./dependencies";
 
 import App from "./App.vue";
 
-Vue.config.productionTip = true;
+Vue.config.productionTip = false;
 Vue.use(VueCookies);
 
 new Vue({

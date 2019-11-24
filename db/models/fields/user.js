@@ -20,8 +20,11 @@ module.exports = (DataTypes) => {
 		password: {
 			allowNull: false,
 			type: DataTypes.STRING,
-			set: function(password) {
+			set: function (password) {
 				this.setDataValue("password", bcrypt.hashSync(password, bcrypt.genSaltSync(8), null));
+			},
+			get: function () {
+				return () => this.getDataValue("password");
 			}
 		},
 		role: {
@@ -31,7 +34,7 @@ module.exports = (DataTypes) => {
 		},
 		image: {
 			allowNull: true,
-			type: DataTypes.STRING
+			type: DataTypes.TEXT
 		}
 	};
 };

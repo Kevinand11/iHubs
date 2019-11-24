@@ -1,5 +1,5 @@
 module.exports = {
-	associate: function(models) {
+	associate: function (models) {
 		this.hasOne(models.token);
 		this.hasMany(models.post);
 		this.hasMany(models.message, {
@@ -21,17 +21,17 @@ module.exports = {
 			foreignKey: "user_id"
 		});
 	},
-	attemptAuth: function({ email, password }) {
+	attemptAuth: function ({ email, password }) {
 		return this.findOne({ where: { email } })
 			.then((user) => {
-				if (user && user.password && user.comparePassword(password)) {
+				if (user.password() && user.comparePassword(password)) {
 					return user;
 				}
 				return false;
 			})
 			.catch((err) => err);
 	},
-	latest: function(page){
+	latest: function (page) {
 		return this.paginate({
 			order: [["created_at", "DESC"]],
 			page,

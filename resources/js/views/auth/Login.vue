@@ -1,5 +1,34 @@
 <template>
-
+    <v-card>
+        <v-card-title>Login</v-card-title>
+        <v-card-text>
+            <v-form>
+                <v-text-field
+                    label="Email Address"
+                    v-model="form.email"
+                    type="email"
+                    autocomplete="email"
+                    prepend-icon="mail"
+                ></v-text-field>
+                <v-text-field
+                    label="Enter your password"
+                    v-model="form.password"
+                    hint="At least 8 characters"
+                    min="8"
+                    prepend-icon="fas fa-lock"
+                    :append-icon="visible ? 'visibility' : 'visibility_off'"
+                    @click:append="toggleVisible"
+                    :type="visible ? 'text' : 'password'"
+                    autocomplete="password"
+                ></v-text-field>
+            </v-form>
+        </v-card-text>
+        <v-card-actions>
+            <v-btn to="/register">Register</v-btn>
+            <v-spacer></v-spacer>
+            <v-btn @click.prevent="loginUser" :loading="busy">Login</v-btn>
+        </v-card-actions>
+    </v-card>
 </template>
 
 <script>
@@ -25,6 +54,9 @@
         },
         methods:{
             ...mapActions(["setAuth","setToken","clearIntended"]),
+            toggleVisible(){
+                this.visible = !this.visible;
+            },
             loginUser(){
                 this.busy = true;
                 this.submitted = true;
@@ -46,7 +78,7 @@
                 }).catch(()=>{
 					this.busy = false;
 					this.$Progress.fail();
-					new toast({ type: 'error', title: this.$t('loginError') });
+					new toast({ type: 'error', title: "Invalid credentials" });
                 });
             },
         }

@@ -1,6 +1,6 @@
 const state = {
     auth: {},
-    token:"",
+    token: null,
     loggedIn: false,
     admin: false
 };
@@ -8,28 +8,29 @@ const state = {
 const getters = {
     getAuth: state => state.auth,
     getToken: state => state.token,
-    isLoggedIn: state => state.auth.name !== '',
-    isAdmin: state => state.auth.role === 'admin',
-	getRoles: state => state.roles,
+    isLoggedIn: state => state.auth.name !== undefined,
+    isAdmin: state => state.auth.role === 1,
+    getRoles: state => state.roles,
 };
 
 const actions = {
-    setAuth({commit}, {user, remember}){
-        if(remember){
-            this._vm.$cookies.set("user",user,"0");
+    setAuth({ commit }, { user, remember }) {
+        if (remember) {
+            this._vm.$cookies.set("user", user, "0");
         }
         commit("authorized", user);
     },
-    setToken({commit}, {token, remember}){
+    setToken({ commit }, { token, remember }) {
         window.axios.defaults.headers.common['Authorization'] = "Bearer " + token;
-        if(remember){
-            this._vm.$cookies.set("oauth",token,"0");
+        if (remember) {
+            this._vm.$cookies.set("oauth", token, "0");
         }
         commit("oauth", token);
     },
-    logout({commit}){
+    logout({ commit }) {
         this._vm.$cookies.remove("oauth");
         this._vm.$cookies.remove("user");
+        window.axios.defaults.headers.common['Authorization'] = null;
         commit("clearAuth");
     }
 };
