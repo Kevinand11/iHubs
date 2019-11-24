@@ -31,12 +31,12 @@ module.exports = {
 						} else {
 							jwtSignIn(res, user);
 						}
-					}).catch((error) => res.status(400).json({ error }).end());
+					})
 				} else {
 					res.status(400).json({ error: "Invalid credentials." }).end();
 				}
-			}).catch((error) => res.status(400).json({ error }).end());
-		}).catch((error) => res.status(400).json({ error }).end());
+			})
+		})
 	},
 	profile: (req, res) => req.user,
 	error: (req, res) => res.status(400).json("Error").end()
