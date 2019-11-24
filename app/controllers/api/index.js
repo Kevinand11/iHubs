@@ -26,7 +26,6 @@ module.exports = {
 			models.user.attemptAuth(result).then((user) => {
 				if (user) {
 					user.getToken().then((token) => {
-						console.log(token);
 						if (token) {
 							res.json({ token: token.token }).end();
 						} else {

@@ -1,9 +1,14 @@
 <template>
-    <h1>Profile</h1>
+    <h1>{{ this.getAuth  }}</h1>
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
+
     export default {
-        name:"Profile"
+        name:"Profile",
+        computed: {
+            ...mapGetters(['getAuth'])
+        }
     }
 </script>

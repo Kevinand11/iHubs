@@ -5,6 +5,7 @@
             <v-container fluid>
 				<vue-progress-bar />
 				<router-view />
+				<app-fab />
 			</v-container>
         </v-content>
         <app-footer />
@@ -15,12 +16,14 @@
 	import { mapGetters, mapActions } from "vuex";
     import Toolbar from "./components/app/Toolbar";
     import Footer from "./components/app/Footer";
+	import Fab from "./components/app/FloatingButton";
 
     export default {
         name: "App",
         components: {
             "app-toolbar": Toolbar,
-            "app-footer": Footer
+            "app-footer": Footer,
+			"app-fab": Fab
         },
         beforeMount() {
 			this.loginUserAutomatically();
