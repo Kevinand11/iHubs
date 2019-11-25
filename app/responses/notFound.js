@@ -1,0 +1,1 @@
+module.exports = (field) => `No ${field} with such id`;

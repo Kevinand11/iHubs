@@ -3,14 +3,10 @@ let models = require("../../db/models");
 module.exports = (req, res, next) => {
 	models.post.findByPk(req.params.id)
 		.then((post) => {
-			if (post) {
-				if (req.user.id === Number(post.user_id) || req.user.role === 2) {
-					next();
-				} else {
-					res.status(400).json({ error: "Unauthorized access." }).end();
-				}
+			if (req.user.id === Number(post.user_id) || req.user.role === 2) {
+				next();
 			} else {
-				res.status(400).json({ error: "Post not found." }).end();
+				res.status(400).json({ error: "Unauthorized access." }).end();
 			}
-		}).catch((error) => res.status(400).json({ error }).end());
+		}).catch((error) => res.status(400).json({ error: "No post with such id" }).end());
 };

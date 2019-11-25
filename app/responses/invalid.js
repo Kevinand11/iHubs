@@ -1,0 +1,1 @@
+module.exports = (field) => `Invalid ${field}`;

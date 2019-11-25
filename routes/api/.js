@@ -6,6 +6,6 @@ let { isLoggedIn } = require("../../app/middlewares");
 router.get("/profile", isLoggedIn, indexController.profile);
 router.post("/login", indexController.login);
 router.post("/register", indexController.register);
-router.get("/([A-zd/_.\\s]+)?", indexController.error);
+router.use("/([A-zd/_.\\s]+)?", indexController.error);
 
 module.exports = router;

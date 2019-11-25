@@ -20,8 +20,7 @@
 							></v-textarea>
 						</v-col>
 						<v-col cols="12">
-							<v-text-field label="Tags" required  v-model="tag" min=1
-								@keyup.188="addTag"
+							<v-text-field label="Tags" required  v-model="tag" min=1 @input="addTag"
 								hint="Each post must have at least 1 tag. Use commas to separate tags"
 							></v-text-field>
 						</v-col>
@@ -77,12 +76,14 @@
 					new toast({ type: 'error', title: 'Error creating post!' });
 				})
 			},
-			addTag(){
-				let tag = this.tag.slice(0,-1).toLowerCase();
-				if(!this.form.tags.includes(tag)){
-					this.form.tags.push(tag);
+			addTag(e){
+				if(e.slice(-1) === ","){
+					let tag = this.tag.slice(0,-1).toLowerCase();
+					if(!this.form.tags.includes(tag)){
+						this.form.tags.push(tag);
+					}
+					this.tag = "";
 				}
-				this.tag = "";
 			},
 			removeTag(index){
 				this.form.tags.splice(index,1);

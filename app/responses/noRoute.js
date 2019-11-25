@@ -1,0 +1,1 @@
+module.exports = () => "Route doesn't exist";
