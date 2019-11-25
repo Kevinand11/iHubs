@@ -1,0 +1,1 @@
+module.exports = () => "Error creating oauth token";

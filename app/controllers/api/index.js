@@ -1,14 +1,14 @@
 const jwt = require("jsonwebtoken");
 const env = process.env.NODE_ENV === "production" ? process.env : require("dotenv").config().parsed;
 let models = require("../../../db/models");
-let { authValidator } = require("../../validators");
+let { userValidator } = require("../../validators");
 let { validateError, databaseError, notFound,
-	invalid, noRoute } = require("../../responses");
+	invalid, noRoute, oauthError } = require("../../responses");
 
 let jwtSignIn = (res, user) => {
 	jwt.sign({ user }, env["SESSION_KEY"], (err, token) => {
 		if (err) {
-			res.status(400).json({ error: "Error creating oauth token" }).end();
+			res.status(400).json({ error: oauthError() }).end();
 		}
 		user.createToken({ token });
 		res.json({ token }).end();
@@ -17,14 +17,14 @@ let jwtSignIn = (res, user) => {
 
 module.exports = {
 	register: (req, res) => {
-		authValidator.register(req.body).then((result) => {
+		userValidator.register(req.body).then((result) => {
 			models.user.create(result)
 				.then((user) => jwtSignIn(res, user))
 				.catch(() => res.status(400).json({ error: databaseError() }).end());
 		}).catch((error) => res.status(400).json({ error: validateError(error) }).end());
 	},
 	login: (req, res) => {
-		authValidator.login(req.body).then((result) => {
+		userValidator.login(req.body).then((result) => {
 			models.user.attemptAuth(result).then((user) => {
 				if (user) {
 					user.getToken()
@@ -33,7 +33,7 @@ module.exports = {
 				} else {
 					res.status(400).json({ error: invalid("credentials") }).end();
 				}
-			}).catch(() => res.status(400).json({ error: databaseError() }).end());
+			}).catch(() => res.status(400).json({ error: invalid("credentials") }).end());
 		}).catch((error) => res.status(400).json({ error: validateError(error) }).end());
 	},
 	profile: (req, res) => {

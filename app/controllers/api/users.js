@@ -22,7 +22,7 @@ module.exports = {
 			.catch(() => res.status(400).json({ error: notFound("user") }).end());
 	},
 	update: (req, res) => {
-		userValidator.update(req.body)
+		userValidator.update(req.body, req.params.id)
 			.then((result) => {
 				models.user.findByPk(req.params.id)
 					.then((user) => {

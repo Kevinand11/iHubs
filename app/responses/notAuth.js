@@ -1,1 +1,1 @@
-module.exports = () => "Logged in user not found";
+module.exports = () => "Unauthorized access";
