@@ -13,7 +13,7 @@
 			<v-menu bottom left offset-y>
 				<template v-slot:activator="{ on }">
 					<v-btn text class="mx-3" v-on="on">
-						<v-icon size="50px">more_vert</v-icon>
+						<v-icon size="50px">fas fa-bars</v-icon>
 					</v-btn>
 				</template>
 				<v-list :color="appInfo.primary" dark class="pa-2" v-if="isLoggedIn">
@@ -62,7 +62,7 @@
             	model: false,
                 search: "",
                 navLinks:[
-                    {id:1, name:'Home', icon:'home', route:'/'},
+                    {id:1, name:'Home', icon:'fas fa-home', route:'/'},
 					{id:2, name:'Alerts', icon:'fas fa-bell', route:'/alerts'},
 					{id:3, name:'Saved', icon:'fas fa-folder-open', route:'/saved'}
 				],
