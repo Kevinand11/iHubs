@@ -40,6 +40,30 @@ module.exports = {
 			}).catch(() => res.status(400).json({ error: notFound("post") }).end());
 		}).catch((error) => res.status(400).json({ error: validateError(error) }).end());
 	},
+	like: (req, res) => {
+		models.like.findOrCreate({
+			where: { user_id: req.user.id, post_id: req.params.id }
+		}).then((following) => res.json(following[0]).end())
+			.catch(() => res.status(400).json({ error: databaseError() }).end());
+	},
+	unlike: (req, res) => {
+		models.like.destroy({
+			where: { user_id: req.user.id, post_id: req.params.id }
+		}).then((result) => res.json(result).end())
+			.catch(() => res.status(400).json({ error: databaseError() }).end());
+	},
+	save: (req, res) => {
+		models.save.findOrCreate({
+			where: { user_id: req.user.id, post_id: req.params.id }
+		}).then((following) => res.json(following[0]).end())
+			.catch(() => res.status(400).json({ error: databaseError() }).end());
+	},
+	unsave: (req, res) => {
+		models.save.destroy({
+			where: { user_id: req.user.id, post_id: req.params.id }
+		}).then((result) => res.json(result).end())
+			.catch(() => res.status(400).json({ error: databaseError() }).end());
+	},
 	delete: (req, res) => {
 		models.post.destroy({ where: { id: req.params.id } })
 			.then((result) => res.json(result).end())

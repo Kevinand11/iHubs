@@ -1,5 +1,5 @@
 <template>
-  	<v-footer dark :color="appInfo.primary">
+  	<v-footer dark :color="appInfo.primary" elevation="24" class="ma-1">
 		<v-card flat tile class="text-center" :class="appInfo.primary" width="100%">
 			<v-card-text>
 				<v-btn v-for="icon in icons" :key="icon.id" class="mx-3" icon>

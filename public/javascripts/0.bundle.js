@@ -89,6 +89,19 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -98,7 +111,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       posts: [],
       page: 1,
       more: true,
-      busy: false
+      busy: false,
+      show: true
     };
   },
   methods: {
@@ -172,7 +186,7 @@ var render = function() {
   return _c(
     "v-card",
     {
-      staticClass: "my-5 pa-3 black--text",
+      staticClass: "my-5 pa-3",
       attrs: { color: _vm.appInfo.lighter, elevation: "24", hover: "" }
     },
     [
@@ -281,6 +295,65 @@ var render = function() {
   return _c(
     "div",
     [
+      _vm.show
+        ? _c(
+            "v-sheet",
+            {
+              staticClass: "text-center",
+              attrs: { color: "primary", elevation: "24", dark: "" }
+            },
+            [
+              _c(
+                "v-container",
+                [
+                  _c(
+                    "v-layout",
+                    { attrs: { "align-center": "" } },
+                    [
+                      _c(
+                        "v-flex",
+                        [
+                          _c("h3", { staticClass: "display-3" }, [
+                            _vm._v("iHub")
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "subheading" }, [
+                            _vm._v("The home where ideas are born!")
+                          ]),
+                          _vm._v(" "),
+                          _c("v-divider", { staticClass: "my-3" }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "title mb-3" }, [
+                            _vm._v("Description")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              staticClass: "mx-0",
+                              attrs: { large: "", color: "primary" },
+                              on: {
+                                click: function($event) {
+                                  _vm.show = false
+                                }
+                              }
+                            },
+                            [_vm._v("Close")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _vm._l(_vm.posts, function(post) {
         return _c("post", { key: post.id, attrs: { post: post } })
       }),

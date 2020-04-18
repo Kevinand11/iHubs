@@ -20,6 +20,16 @@ module.exports = {
 			through: models.friend,
 			foreignKey: "user_id"
 		});
+		this.belongsToMany(models.post, {
+			as: "liked",
+			through: models.like,
+			foreignKey: "user_id"
+		});
+		this.belongsToMany(models.post, {
+			as: "saved",
+			through: models.save,
+			foreignKey: "user_id"
+		});
 	},
 	attemptAuth: function ({ email, password }) {
 		return this.findOne({ where: { email } })

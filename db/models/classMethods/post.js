@@ -3,6 +3,16 @@ const Sequelize = require("sequelize");
 module.exports = {
 	associate: function (models) {
 		this.belongsTo(models.user, { onDelete: "cascade", hooks: true });
+		this.belongsToMany(models.user, {
+			as: "saves",
+			through: models.save,
+			foreignKey: "post_id"
+		});
+		this.belongsToMany(models.user, {
+			as: "likes",
+			through: models.like,
+			foreignKey: "post_id"
+		});
 	},
 	latest: function (page) {
 		return this.paginate({

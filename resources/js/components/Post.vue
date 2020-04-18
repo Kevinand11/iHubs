@@ -1,5 +1,5 @@
 <template>
-    <v-card :color="appInfo.lighter" class="my-5 pa-3 black--text" elevation="24" hover>
+    <v-card :color="appInfo.lighter" class="my-5 pa-3" elevation="24" hover>
         <v-card-title primary-title>
             <v-layout row wrap>
                 <v-flex xs2 class="text-center">

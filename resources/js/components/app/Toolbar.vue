@@ -59,7 +59,7 @@
         name: "Toolbar",
         data(){
             return {
-            	model: false,
+				model: false,
                 search: "",
                 navLinks:[
                     {id:1, name:'Home', icon:'fas fa-home', route:'/'},
@@ -80,11 +80,11 @@
 		methods:{
 			...mapActions(['logout']),
 			toggleModel(){
-        		this.model = !this.model;
+				this.model = !this.model;
 				this.search = '';
 			},
 			searchIt(){
-        		if(this.search){
+				if(this.search){
 					console.log(this.search);
 					this.search = '';
 				}

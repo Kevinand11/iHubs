@@ -1,5 +1,18 @@
 <template>
     <div>
+        <v-sheet color="primary" elevation="24" dark class="text-center" v-if="show">
+            <v-container>
+                <v-layout align-center>
+                    <v-flex>
+                        <h3 class="display-3">iHub</h3>
+                        <span class="subheading">The home where ideas are born!</span>
+                        <v-divider class="my-3"></v-divider>
+                        <div class="title mb-3">Description</div>
+                        <v-btn large color="primary" class="mx-0" @click="show = false">Close</v-btn>
+                    </v-flex>
+                </v-layout>
+            </v-container>
+        </v-sheet>
         <post v-for="post in posts" :key="post.id" :post="post"/>
         <v-btn color="info" block v-if="more" @click="fetchPosts" :loading="busy">Load More</v-btn>
     </div>
@@ -16,7 +29,8 @@
                 posts: [],
                 page: 1,
                 more: true,
-                busy: false
+                busy: false,
+                show: true
             };
         },
         methods: {
